@@ -2,7 +2,7 @@
 
 **A cache-aware LLM inference platform proof of concept focused on reliability, observability, and failure recovery.**
 
-## What This Proves
+## Using this to see how inference platforms work and what failures they might encounter
 
 This repo is a production-oriented proof of concept for operating LLM inference under pressure.
 
