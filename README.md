@@ -12,7 +12,7 @@ It is designed to demonstrate:
 - controlled failure injection and incident-style analysis
 - cache-aware operational thinking, especially around KV cache pressure and loss
 - platform instincts such as admission control, graceful recovery, and measurable SLOs
-- a credible path from local single-GPU development to AWS deployment
+- a deployment story that spans local development and AWS-hosted operation
 
 The point is not just to serve a model.
 The point is to show what happens when the serving system degrades, loses state, and recovers.
@@ -58,9 +58,41 @@ Initial development target:
 - Prometheus and Grafana for metrics and dashboards
 - kind for local Kubernetes testing
 
+## Deployment Targets
+
+This project is intended to support two serious operating environments:
+
+- local development and failure reproduction on a single machine
+- AWS deployment for a more production-like infrastructure path
+
+Local work is where failure scenarios, metrics, and recovery behavior are developed quickly.
+AWS is where the same design is exercised against cloud concerns such as GPU scheduling, IAM, networking, and interruption handling.
+
+## Local Requirements
+
+The preferred local environment is a machine with a supported GPU and enough memory headroom to run a small model plus observability tooling.
+
+### Recommended local setup
+
+- Linux with an NVIDIA GPU is the clearest primary path
+- enough VRAM to run a small development model and reproduce cache-pressure behavior
+- Docker and kind for container and Kubernetes testing
+- enough system RAM and disk to hold model weights, containers, and monitoring components
+
+### Possible but lower-confidence paths
+
+- Apple Silicon is possible, but current `vLLM` support is experimental on macOS CPU
+- GPU-accelerated Apple Silicon support depends on the separate community `vllm-metal` plugin rather than the mainline path
+- CPU-only local execution is useful for scaffolding and basic integration work, but it is not the right environment for the main cache and latency experiments
+
+### Practical expectation
+
+If the goal is to reproduce the main reliability scenarios with realistic timings, a GPU-backed local environment is strongly preferred.
+If the goal is only to develop the control plane, dashboards, or basic integration flows, CPU-only and Apple Silicon environments can still be useful.
+
 ## Core Reliability Scenarios
 
-The portfolio centerpiece is the `failures/` directory.
+The `failures/` directory is the technical centerpiece of the project.
 
 | Scenario | What It Demonstrates | Status |
 |---|---|---|
@@ -83,8 +115,8 @@ The current focus is to prove that the system can:
 
 ## AWS Path
 
-AWS remains in scope, but as a secondary path.
-The main hiring signal comes from strong local evidence and disciplined operational documentation.
+AWS is a first-class target for this project, not just a documentation exercise.
+The aim is to keep the local path fast for iteration while also designing for a realistic cloud deployment model.
 
 Planned AWS elements:
 
