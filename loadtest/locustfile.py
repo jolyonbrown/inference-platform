@@ -1,0 +1,1 @@
+"""Placeholder load-testing entrypoint."""

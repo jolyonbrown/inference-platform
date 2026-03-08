@@ -1,0 +1,6 @@
+resources:
+  - namespace.yaml
+  - gateway-deployment.yaml
+  - vllm-deployment.yaml
+  - services.yaml
+  - pdb.yaml

@@ -1,0 +1,5 @@
+# Platform configuration placeholder
+platform:
+  baseline_concurrency: 1
+  overload_policy: reject
+  notes: replace placeholder values once baseline measurements exist

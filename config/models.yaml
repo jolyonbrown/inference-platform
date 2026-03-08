@@ -1,0 +1,5 @@
+# Model registry placeholder
+models:
+  - name: primary-dev-model
+    enabled: true
+    notes: choose a model that fits local GPU constraints and supports useful context-length experiments
